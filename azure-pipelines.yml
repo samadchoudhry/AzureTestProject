@@ -10,19 +10,19 @@ pool:
  --vmImage: 'windows-latest'
 
 variables:
-- buildPlatform: 'Any CPU'
-- buildConfiguration: 'Release'
-- solution: '**/RoundTheCode.AzureTestProject.sln'
-- project: '**/RoundTheCode.AzureTestProject.csproj'
+buildPlatform: 'Any CPU'
+buildConfiguration: 'Release'
+solution: '**/RoundTheCode.AzureTestProject.sln'
+project: '**/RoundTheCode.AzureTestProject.csproj'
 
 steps:
-- task: NuGetToolInstaller@1
---name: 'NuGetToolInstaller'
---displayName: 'NuGet Tool Installer'
+task: NuGetToolInstaller@1
+name: 'NuGetToolInstaller'
+displayName: 'NuGet Tool Installer'
 
-- task: NuGetCommand@2
---name: 'NuGetRestore'
---displayName: 'NuGet restore packages'
+task: NuGetCommand@2
+name: 'NuGetRestore'
+displayName: 'NuGet restore packages'
 inputs:
 command: 'restore'
 restoreSolution: '$(solution)'
