@@ -17,39 +17,39 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-- name: 'NuGetToolInstaller'
-- displayName: 'NuGet Tool Installer'
+  name: 'NuGetToolInstaller'
+  displayName: 'NuGet Tool Installer'
 
 - task: NuGetCommand@2
-- name: 'NuGetRestore'
-- displayName: 'NuGet restore packages'
-- inputs:
-- command: 'restore'
-- restoreSolution: '$(solution)'
-- feedsToUse: 'select'
+  name: 'NuGetRestore'
+  displayName: 'NuGet restore packages'
+  inputs:
+     command: 'restore'
+     restoreSolution: '$(solution)'
+     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
-- name: 'Tests'
-- displayName: 'Run tests'
-- input:
-- command: 'test'
-- projects: '$(solution)'
-- arguments: '--configuration $(BuildConfiguration)'
+  name: 'Tests'
+  displayName: 'Run tests'
+  input:
+     command: 'test'
+     projects: '$(solution)'
+     arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
-- inputs:
-- name: 'Publish'
-- displayName: 'Publish'
-- command: 'publish'
-- publishWebProjects: false
-- projects: '$(project)'
-- arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-- zipAfterPublish: false
+  name: 'Publish'
+  displayName: 'Publish'
+  inputs:
+     command: 'publish'
+     publishWebProjects: false
+     projects: '$(project)'
+     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+     zipAfterPublish: false
 
 - task: PublishBuildArtifacts@1
-- name: 'PublishBuildArtifacts'
-- displayName: 'Publish Build Artifacts'
-- inputs:
-- PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-- ArtifactName: 'AzureTestProject'
-- publishLocation: 'Container'
+  name: 'PublishBuildArtifacts'
+  displayName: 'Publish Build Artifacts'
+  inputs:
+     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+     ArtifactName: 'AzureTestProject'
+     publishLocation: 'Container'
